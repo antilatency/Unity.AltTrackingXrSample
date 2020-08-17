@@ -1,0 +1,84 @@
+{
+  "Sdk": {
+    "Name": "AntilatencySDK",
+    "Category": "tags",
+    "Version": "2.1.0-rc.2",
+    "Revision": "289"
+  },
+  "Dependencies": [
+    {
+      "Name": "AntilatencyApiGenerator",
+      "Category": "trunk",
+      "Version": null,
+      "Revision": "442"
+    },
+    {
+      "Name": "AntilatencyLibraryLoader",
+      "Category": "trunk",
+      "Version": null,
+      "Revision": "17"
+    },
+    {
+      "Name": "AntilatencyLicense",
+      "Category": null,
+      "Version": null,
+      "Revision": "12"
+    },
+    {
+      "Name": "CiBuildScripts",
+      "Category": "branches",
+      "Version": "sdkBuilders",
+      "Revision": "65"
+    }
+  ],
+  "BinaryDependencies": [
+    {
+      "Name": "AltTracking",
+      "Category": "tags",
+      "Version": "4.0.0-factory2.newapilayout",
+      "Revision": "15592"
+    },
+    {
+      "Name": "BracerCotask",
+      "Category": "tags",
+      "Version": "2.0.0-newapilayout",
+      "Revision": "15592"
+    },
+    {
+      "Name": "AntilatencyDeviceNetwork",
+      "Category": "tags",
+      "Version": "7.5.0-newapilayout",
+      "Revision": "15592"
+    },
+    {
+      "Name": "AntilatencyHardwareExtensionInterface",
+      "Category": "tags",
+      "Version": "2.0.0",
+      "Revision": "15592"
+    },
+    {
+      "Name": "AntilatencyRadioMetrics",
+      "Category": "tags",
+      "Version": "1.0.0-newapilayout",
+      "Revision": "15592"
+    },
+    {
+      "Name": "AntilatencyStorageClient",
+      "Category": "tags",
+      "Version": "3.0.2",
+      "Revision": "15592"
+    },
+    {
+      "Name": "AntilatencyTrackingAlignment",
+      "Category": "tags",
+      "Version": "1.0.1",
+      "Revision": "15592"
+    },
+    {
+      "Name": "UsbServiceInterfaces",
+      "Category": "tags",
+      "Version": "1.0.0+factory1.newapilayout",
+      "Revision": "15592"
+    }
+  ]
+}
