@@ -21,6 +21,10 @@ public class AltTrackingXR : AltTracking {
     private bool _altInitialPositionApplied = false;
     private const float _bQuality = 0.15f;
 
+    private Transform _aSpace;
+    private Transform _bSpace;
+    private Transform _b;
+
     protected override NodeHandle GetAvailableTrackingNode() {
         return GetUsbConnectedFirstIdleTrackerNode();
     }
@@ -71,6 +75,10 @@ public class AltTrackingXR : AltTracking {
 
         _lerpRotation = HmdPoseDriver.trackingType == UnityEngine.SpatialTracking.TrackedPoseDriver.TrackingType.RotationOnly ||
                         HmdPoseDriver.trackingType == UnityEngine.SpatialTracking.TrackedPoseDriver.TrackingType.RotationAndPosition;
+
+        _aSpace = transform.parent;
+        _bSpace = transform;
+        _b = XRCamera.transform;
     }
 
     protected override void Update() {
@@ -95,61 +103,8 @@ public class AltTrackingXR : AltTracking {
         var bPositionRecieved = centerEye.TryGetFeatureValue(UnityEngine.XR.CommonUsages.centerEyePosition, out var bPosition) && state.HasFlag(UnityEngine.XR.InputTrackingState.Position);
         var bRotationRecieved = centerEye.TryGetFeatureValue(UnityEngine.XR.CommonUsages.centerEyeRotation, out var bRotation) && state.HasFlag(UnityEngine.XR.InputTrackingState.Rotation);
 
-        Debug.Log("bPositionRecieved: " + bPositionRecieved + ", bRotationRecieved: " + bRotationRecieved);
-
         bool altTrackingActive;
         Antilatency.Alt.Tracking.State trackingState;
-
-        //bool bRotationRecieved = false;
-        //bool bPositionRecieved = false;
-
-        //var bPosition = Vector3.zero;
-        //var bRotation = Quaternion.identity;
-
-        //var states = new List<UnityEngine.XR.XRNodeState>();
-		//UnityEngine.XR.InputTracking.GetNodeStates(states);
-
-		//if (states.Exists(v => v.nodeType == UnityEngine.XR.XRNode.CenterEye)) {
-		//	var centerEyeState = states.First(v => v.nodeType == UnityEngine.XR.XRNode.CenterEye);
-		//	if (centerEyeState.tracked) {
-		//		bRotationRecieved = centerEyeState.TryGetRotation(out bRotation);
-		//		bPositionRecieved = centerEyeState.TryGetPosition(out bPosition);
-		//	}
-  //      } else {
-  //          Debug.Log("No center eye");
-  //      }
-
-		//if (!bRotationRecieved) {
-		//	if (states.Exists(v => v.nodeType == UnityEngine.XR.XRNode.LeftEye) && states.Exists(v => v.nodeType == UnityEngine.XR.XRNode.RightEye)) {
-		//		var leftEyeState = states.First(v => v.nodeType == UnityEngine.XR.XRNode.LeftEye);
-		//		var rightEyeState = states.First(v => v.nodeType == UnityEngine.XR.XRNode.RightEye);
-
-		//		var leftEyePos = Vector3.zero;
-		//		var rightEyePos = Vector3.zero;
-		//		var leftEyeRot = Quaternion.identity;
-		//		var rightEyeRot = Quaternion.identity;
-
-		//		var leftEyePosRecieved = leftEyeState.TryGetPosition(out leftEyePos);
-		//		var rightEyePosRecieved = rightEyeState.TryGetPosition(out rightEyePos);
-		//		var leftEyeRotRecieved = leftEyeState.TryGetRotation(out leftEyeRot);
-		//		var rightEyeRotRecieved = rightEyeState.TryGetRotation(out rightEyeRot);
-
-		//		bRotationRecieved = leftEyeRotRecieved && rightEyeRotRecieved;
-		//		bPositionRecieved = leftEyePosRecieved && rightEyePosRecieved;
-
-		//		if (bPositionRecieved) {
-		//			bPosition = Vector3.Lerp(leftEyePos, rightEyePos, 0.5f);
-  //              } else {
-  //                  Debug.Log("No position");
-  //              }
-
-		//		if (bRotationRecieved) {
-		//			bRotation = Quaternion.Lerp(leftEyeRot, rightEyeRot, 0.5f);
-  //              } else {
-  //                  Debug.Log("No rotation");
-  //              }
-  //          }
-		//}
 
 		altTrackingActive = GetRawTrackingState(out trackingState);
 
@@ -166,7 +121,7 @@ public class AltTrackingXR : AltTracking {
 
 			ExtrapolationTime = (float)result.timeBAheadOfA;
 			_placement.rotation = result.rotationARelativeToB.ToQuaternion();
-			transform.localRotation = result.rotationBSpace.ToQuaternion();
+			_bSpace.localRotation = result.rotationBSpace.ToQuaternion();
 		}
 
         altTrackingActive = GetTrackingState(out trackingState);
@@ -175,31 +130,30 @@ public class AltTrackingXR : AltTracking {
         }
 
         if (!_lerpRotation) {
-            transform.localRotation = trackingState.pose.rotation;
-            XRCamera.transform.localRotation = Quaternion.identity;
+            _bSpace.localRotation = trackingState.pose.rotation;
+            _b.localRotation = Quaternion.identity;
         }
             
         if (_lerpPosition) {
             if (trackingState.stability.stage == Antilatency.Alt.Tracking.Stage.Tracking6Dof && bPositionRecieved) {
-                var aWorldSpace = transform.parent.TransformPoint(trackingState.pose.position);
-                var a = transform.parent.InverseTransformPoint(aWorldSpace);
-                var bSpace = transform.localPosition;
-                var b = transform.parent.InverseTransformPoint(transform.TransformPoint(bPosition));
+                var a = trackingState.pose.position;
+                var bSpace = _bSpace.localPosition;
+                var b = _aSpace.InverseTransformPoint(_bSpace.TransformPoint(bPosition));
 
                 Vector3 averagePositionInASpace;
 
                 if (!_altInitialPositionApplied) {
-                    averagePositionInASpace = (b * 0.0f + a * 100.0f) / (100.0f + 0.0f);
+                    averagePositionInASpace = a;
                     _altInitialPositionApplied = true;
                 } else {
                     averagePositionInASpace = (b * _bQuality + a * trackingState.stability.value) / (trackingState.stability.value + _bQuality);
                 }
 
-                transform.localPosition += averagePositionInASpace - b;
+                _bSpace.localPosition += averagePositionInASpace - b;
             }
         } else {
-            transform.localPosition = trackingState.pose.position;
-            XRCamera.transform.localPosition = Vector3.zero;
+            _bSpace.localPosition = trackingState.pose.position;
+            _b.localPosition = Vector3.zero;
         }
     }
 
