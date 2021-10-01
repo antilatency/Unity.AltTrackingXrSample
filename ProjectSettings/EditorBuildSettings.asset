@@ -4,11 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Antilatency/XrSample/Scenes/AltXrSample.unity
+    guid: 7bdc6b0d0d8139a49b3ef8895821b32c
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: fc1ce8566750a444695a9654f7ae8f21,
       type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: e855be5283da7ae4995d3773ef982320,
       type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 682047eacf6fbd744894a4b2feebaf96,
+      type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: b6546a7006ab709419e21cebe375d389,
       type: 2}
