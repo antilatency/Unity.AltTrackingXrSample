@@ -1,25 +1,21 @@
-# Antilatency Alt Tracking for Unity XR sample project
+[![Antilatency SDK - 3.5.2](https://img.shields.io/badge/Antilatency_SDK-3.5.2-acc435?style=for-the-badge)](https://)
 
-## Intro
+[![Unity - 2021.3.3f1](https://img.shields.io/badge/Unity-2021.3.3f1-787777?style=for-the-badge&logo=unity)](https://)
 
-This project includes sample implementation of Antilatency Tracking system usage with Unity XR.
+## Summary
 
-The main sample scene named AltXrSample.unity is located at Assets/Antilatency/XrSample/Scenes. 
+This project includes example implementation of headset tracking with Antilatency tracking system, [Tracking Alignment library](https://developers.antilatency.com/Software/Libraries/Antilatency_Tracking_Alignment_Library_en.html) and Unity XR platform.
 
-Check the AltTrackingXR.cs component located at Assets/Antilatency/XrSample/Scripts to see how you can use Antilatency Tracking and Unity XR tracking data at the same time.
+    .
+    └── Assets
+        └── Antilatency
+            └── XrSample
+                ├── Scenes        # Contains example scene AltXrSample.unity
+                └── Scripts       # Contains example script AltTrackingXR.cs
 
-## SDK version
-This project is based on Antilatency SDK 3.3.0 release
+## Adding new Unity XR plugins
+This project includes standard Unity XR plugins (Windows MR, Oculus and etc.)
 
-## Adding new XR plugins
-This project shows the support of standard Unity XR plugins (Windows MR, Oculus and etc.)
-
-You can add support for other headsets using XR plugins. 
-
-For example:
+You can add support for other headsets using external XR plugins:
 * For Vive Focus 3 headsets, add Vive [Wave XR plugin](https://developer.vive.com/resources/vive-wave/sdk/411/vive-wave-xr-plugin/)
-* For Pico Neo 2/3 headsets, add Pico [Unity XR Platform SDK](https://developer.pico-interactive.com/sdk) 
-
-## Requirements
-
-* Unity 2019.4.28f1
+* For Pico Neo 2/3 headsets, add Pico [Unity XR Platform SDK](https://developer.pico-interactive.com/sdk)
