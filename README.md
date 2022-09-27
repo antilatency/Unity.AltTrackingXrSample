@@ -5,6 +5,7 @@
 ## Summary
 
 This project includes example implementation of headset tracking with Antilatency tracking system, [Tracking Alignment library](https://developers.antilatency.com/Software/Libraries/Antilatency_Tracking_Alignment_Library_en.html) and Unity XR platform.
+You can use the XR controllers and interact with objects on the scene (orange cubes) using the grip buttons.
 
     .
     └── Assets
