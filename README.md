@@ -1,10 +1,11 @@
 [![Antilatency SDK - 3.5.2](https://img.shields.io/badge/Antilatency_SDK-3.5.2-acc435?style=for-the-badge)](https://)
 
-[![Unity - 2021.3.3f1](https://img.shields.io/badge/Unity-2021.3.3f1-787777?style=for-the-badge&logo=unity)](https://)
+[![Unity - 2021.3.5f1](https://img.shields.io/badge/Unity-2021.3.5f1-787777?style=for-the-badge&logo=unity)](https://)
 
 ## Summary
 
 This project includes example implementation of headset tracking with Antilatency tracking system, [Tracking Alignment library](https://developers.antilatency.com/Software/Libraries/Antilatency_Tracking_Alignment_Library_en.html) and Unity XR platform.
+
 You can use the XR controllers and interact with objects on the scene (orange cubes) using the grip buttons.
 
     .
