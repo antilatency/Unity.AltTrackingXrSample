@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "com.antilatency.sdk": "https://github.com/AntilatencySDK/Release_3.5.2.git#subset-fbca7489742d0c510b067232282b4aaf9252fafa",
+    "com.antilatency.alt-tracking-xr": "https://github.com/antilatency/Unity.AltTrackingXrPackage.git",
+    "com.antilatency.sdk": "https://github.com/AntilatencySDK/Release_4.0.0.git#subset-76602a06327405e1cdb72280f3f5de98ac72368a",
     "com.unity.collab-proxy": "1.15.18",
     "com.unity.ide.rider": "3.0.14",
     "com.unity.ide.visualstudio": "2.0.15",

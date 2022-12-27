@@ -1,11 +1,22 @@
 {
   "dependencies": {
+    "com.antilatency.alt-tracking-xr": {
+      "version": "https://github.com/antilatency/Unity.AltTrackingXrPackage.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.xr.oculus": "3.0.2",
+        "com.unity.xr.management": "4.2.1",
+        "com.unity.xr.interaction.toolkit": "2.1.1"
+      },
+      "hash": "b98969e9c15dcfc4e23ee2bb5e0ed72381184949"
+    },
     "com.antilatency.sdk": {
-      "version": "https://github.com/AntilatencySDK/Release_3.5.2.git#subset-fbca7489742d0c510b067232282b4aaf9252fafa",
+      "version": "https://github.com/AntilatencySDK/Release_4.0.0.git#subset-76602a06327405e1cdb72280f3f5de98ac72368a",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "94c9c0e74b585f9d3b08745cbfcc083a9724baf9"
+      "hash": "e5bc609310869c31de1696975c69dcd269d5a8f2"
     },
     "com.unity.collab-proxy": {
       "version": "1.15.18",
